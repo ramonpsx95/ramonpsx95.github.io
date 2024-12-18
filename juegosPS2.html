@@ -56,7 +56,7 @@ nav ul li:hover {
 
 a{
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(10, 8, 121);
+    color: rgb(18, 18, 19);
     text-decoration: none;    
     transition:0.40s;         
 }
@@ -89,7 +89,7 @@ footer{
 }
 
 .link{
-    color: rgb(39, 3, 97);
+    color: rgb(20, 20, 20);
     padding-left: 20px;
     font-size: 20px; 
     transition:0.40s;
@@ -121,6 +121,93 @@ footer{
     transition:0.40s;
 }
 
+button{
+
+border:0;
+
+background-image: linear-gradient(
+
+    150deg,
+
+    #9500,
+
+    #09F,
+
+    #00DDFF
+
+);
+
+border-radius: 8px;
+
+color:#fff;
+
+display: flex;
+
+font-size: 18px;
+
+padding: 4px;
+
+cursor: pointer;
+
+transition: .3s;
+
+}
+
+
+
+button span{
+
+background-color: #111;
+
+padding: 16px 24px;
+
+border-radius: 6px;
+
+transition: .3s;
+
+}
+
+button:hover span {
+
+background: none;
+
+}
+
+button:active {
+
+transform: scale(0,9)
+
+}
+
+.juego_contenedor{
+   padding-right: 2px;
+    width: 500px;
+    display: inline;
+}
+.juego img{
+   
+    opacity: 100%;
+    height: 200px;
+    width: 200px;
+    border: solid;
+    border-color: rgb(184, 184, 184);
+    transition:0.40s;
+}
+
+.juego:hover{
+    opacity: 70%;
+    border-color: rgb(8, 19, 68);
+    transition:0.40s;
+    cursor: pointer;
+}
+
+.juego{
+    background-color: rgb(223, 223, 223);
+    margin: auto;
+    display: inline-block;
+    padding: 40px;
+    margin:10px
+}
 </style>
     <body>
         <br>
@@ -128,7 +215,7 @@ footer{
         <br>
         <br>
         <br>
-        <div class="juego_contenedor">
+        <!--<div class="juego_contenedor">
             <div class="juego">
                 <a href="https://archive.org/download/re-4-lat/PS3/Re4lat-PKG.zip/re4lat.pkg"><img
                         src="https://ia601509.us.archive.org/14/items/re-4-lat/Title%20Re4lat.jpg"></a>
@@ -155,6 +242,39 @@ footer{
                 <a href="https://www.mediafire.com/file/qkb8nnzhcsq6fkf/Devil_May_Cry_3_By_VSSONIC.pkg/file"><img
                         src="https://m.media-amazon.com/images/I/71R+Na4J2aL._AC_UF1000,1000_QL80_.jpg" width="200"
                         height="200"></a>
+
+
+                        <button><span>Descargar</span></button>
+                        <button><span>Descargar</span></button>
+                        <button><span>Descargar</span></button>
+                        <button><span>Descargar</span></button>
+                        <button><span>Descargar</span></button>
+                        <button><span>Descargar</span></button>
+
+
+                        -->
+
+                        <div class="juego_contenedor">
+                            <div class="juego">
+                                <a href="https://zeus.dl.playstation.net/cdn/UP9000/NPUA81087_00/FViZXlGFfPRaltxJSvLHBHPFwctOgQoglGEQkYDxORbGOAZLLeQxBSiCupOOtfLk.pkg"><img src="https://www.vgdb.com.br/gf/fotos/games/media_38797/beyond-two-souls-38797.jpg" width="220" height="300">
+                                    <p>BEYOND TWO SOULS<br> LATINO
+                                        <br> 25 GB</p>
+                                        <button><span>Descargar</span></button>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="juego_contenedor">
+                            <div class="juego">
+                                <a href="https://zeus.dl.playstation.net/cdn/UP9000/NPUA81087_00/FViZXlGFfPRaltxJSvLHBHPFwctOgQoglGEQkYDxORbGOAZLLeQxBSiCupOOtfLk.pkg"><img src="https://www.vgdb.com.br/gf/fotos/games/media_38797/beyond-two-souls-38797.jpg" width="220" height="300">
+                                    <p>BEYOND TWO SOULS<br> LATINO
+                                        <br> 25 GB</p>
+                                        <button><span>Descargar</span></button>
+                            </div>
+                            </a>
+                        </div>
+
+
+
             </div>
         </div>
     </body>
