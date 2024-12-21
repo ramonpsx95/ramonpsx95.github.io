@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+body{
+  margin: 0;
+  background-color:rgb(8, 23, 71);
+}
+
+
+header{
+  display: flex;
+  height: 50px;
+  background-image: linear-gradient(180deg,#044b39,#082955,#000000);
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+}
+
+P.logoPS3
+{
+  font-size: 45PX;
+}
+a.nav_link{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: transparent;
+  border-radius: 20px;
+  color:white;
+  padding:10px;
+  text-decoration: none;
+  width :90px;
+  margin:10px;
+  transition: 0.40s;
+}
+
+a.nav_link:hover{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffff;
+  border-radius: 20px;
+  color:rgb(0, 0, 0);
+  padding:10px;
+  text-decoration: none;
+  width :90px;
+  margin:10px;
+  transition: 0.40s;
+}
+
+
+div.carrusel
+{
+  display: block;
+  unicode-bidi: isolate;
+}
+
+
+div.contenedor_juego
+{
+  padding:2px;
+  margin: 10px;
+  width: 100px;
+  display: flex;/*
+ filter: blur(2px);*/
+}
+/* caja que contiene toda la info del juego*/
+div.juego{
+  border-left: 3px solid #3be7de;
+  border-top: 3px solid #3be7de;
+  border-radius: 15px;
+  background-image: linear-gradient(180deg,#08da9b,#07466b,#03101b);
+  padding:40px;
+  width: 220px;
+  height: 390px;
+  transition: 0.40s;
+  
+}
+
+div.juego:hover
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.40s;
+}
+
+img.imagen_juegoPS2
+{
+  border-radius: 20px;
+  width:180px ;
+  height:250px;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+  color:white;
+  font-family: "Roboto", serif;
+}
+
+button.masInfo
+
+{
+  border: none;
+    background-color: #4b6777;
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding-bottom: 15px;
+    transition: 0.50s;
+    font-family: "Roboto", serif;
+    width: 230px;
+}
+
+button.masInfo:hover
+
+{
+  background-color: #273e4b;
+  border-radius: 25px;
+    color: rgb(248, 250, 249);
+    text-decoration: none;
+    padding-bottom: 15px;
+    transition: 0.50s;
+    font-family: "Roboto", serif;
+}
+
+/* boton descargar */
+
+button.boton_descargar
+
+{
+  
+  border: none;
+    background-image:linear-gradient(80deg,#20ace4,#1478ca,#0d3972);
+    font-size: 17px;
+    border-radius: 25px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: 0.50s;
+    padding: 10px;
+    font-family: "Roboto", serif;
+    width: 230px;
+    align-items: center;
+}
+
+button.boton_descargar:hover
+
+{
+    background-image:linear-gradient(80deg,#a200ff,#ff009d);
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    transition: 0.20s;
+    font-family: "Roboto", serif;
+  cursor: pointer;
+}
+
