@@ -1,0 +1,194 @@
+html<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora - Xbox 360 Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap');
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(ellipse at top, #2a3a7a 0%, #10102a 40%, #050510 100%);
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+ .top-status {
+    text-align: right;
+    padding: 20px 40px;
+    font-size: 14px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+  }
+
+ .shelf-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    position: relative;
+  }
+
+ .shelf {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+ .game {
+    width: 140px;
+    height: 190px;
+    flex-shrink: 0;
+    transition: all 0.35s ease;
+    transform: scale(0.85);
+    opacity: 0.6;
+    filter: brightness(0.7);
+    position: relative;
+    cursor: pointer;
+  }
+
+ .game img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+  }
+
+  /* El seleccionado del centro */
+ .game.active {
+    transform: scale(1.25);
+    opacity: 1;
+    filter: brightness(1.1);
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(100,180,255,0.6), 0 0 0 2px white;
+  }
+
+  /* Reflejo tipo Aurora */
+ .game::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background: inherit;
+    background-image: var(--bg);
+    background-size: cover;
+    transform: scaleY(-1);
+    opacity: 0.3;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+    margin-top: 2px;
+  }
+
+  /* Reflejo real con img */
+ .game.reflection {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleY(-1);
+    opacity: 0.10;
+    mask-image: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent 30%);
+    pointer-events: none;
+    margin-top: 4px;
+  }
+ .game.reflection img { width:100%; height:100%; object-fit:cover; filter: blur(1px); }
+
+  /* Barra inferior */
+ .bottom-bar {
+    height: 75px;
+    background: linear-gradient(to bottom, #4a4a4a, #2b2b2b);
+    border-top: 1px solid #666;
+    display: flex;
+    flex-direction: column;
+  }
+
+ .game-title {
+    text-align: center;
+    padding: 8px;
+    font-size: 16px;
+    background: #333;
+    font-weight: 300;
+  }
+ .game-title span { opacity:0.6; font-size:12px; display:block; }
+
+ .controls {
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:30px;
+    padding:0 30px;
+    background: #e9e9e9;
+    color: #333;
+    font-size: 13px;
+  }
+
+ .btn { display:flex; align-items:center; gap:6px; }
+ .btn i {
+    width:22px; height:22px; border-radius:50%;
+    display:grid; place-items:center;
+    font-style:normal; font-weight:bold; color:white; font-size:12px;
+  }
+ .a { background:#4CAF50; }.b { background:#d32f2f; }
+ .x { background:#1976D2; }.y { background:#FBC02D; color:#333!important; }
+ .lb { border:1px solid #333; border-radius:10px!important; width:auto!important; padding:0 6px; color:#333!important; }
+</style>
+</head>
+<body>
+
+<div class="top-status">Idle</div>
+
+<div class="shelf-container">
+  <div class="shelf" id="shelf">
+    <!-- Cambia las imagenes por tus covers -->
+    <div class="game"><img src="https://imgs.search.brave.com/dqriU1aemUp9DDHawM9Cj7VcHxbCOeCuuQXO2hUng7o/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9ieWdhbWVzLmNv/bS9jb3ZlcnMvNjgy/NzE4LWNhbGwtb2Yt/ZHV0eS1ibGFjay1v/cHMtaWkteGJveC0z/NjAtZnJvbnQtY292/ZXIuanBn"></div>
+    <div class="game"><img src="https://imgs.search.brave.com/NfJk6_-9hWK6zRxlP2f2XZwbDTGlajE7fabQVpMOtvM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9ieWdhbWVzLmNv/bS9jb3ZlcnMvMjYx/NTgzLWNhbGwtb2Yt/ZHV0eS1ibGFjay1v/cHMteGJveC0zNjAt/ZnJvbnQtY292ZXIu/anBn"></div>
+   <div class="game"><img src="https://imgs.search.brave.com/S9Hpg2LBmvaq0ZYY0E5uEUyY5tRV5B-FK7wphdj7pHA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9ieWdhbWVzLmNv/bS9jb3ZlcnMvMjI0/Mzk5OS1jYWxsLW9m/LWR1dHktYmxhY2st/b3BzLWlpaS14Ym94/LTM2MC1mcm9udC1j/b3Zlci5wbmc"></div>
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <div class="game-title" id="gameTitle">Call of Duty®: Black Ops II <span>26 of 57</span></div>
+  <div class="controls">
+    <div class="btn"><i class="a">A</i> Launch</div>
+    <div class="btn"><i class="b">B</i> View</div>
+    <div class="btn"><i class="x">X</i> Quick Browse</div>
+    <div class="btn"><i class="y">Y</i> Details</div>
+    <div class="btn" style="margin-left:auto"><i class="lb">◁</i> Information</div>
+    <div class="btn"><i class="lb">▷</i> Settings</div>
+  </div>
+</div>
+
+<script>
+  const shelf = document.getElementById('shelf');
+  let index = 3;
+  const games = document.querySelectorAll('.game');
+
+  function update() {
+    games.forEach((g,i) => g.classList.toggle('active', i===index));
+    const offset = (shelf.offsetWidth / 2) - (games[index].offsetLeft + 70);
+    shelf.style.transform = `translateX(${offset}px)`;
+  }
+
+  document.addEventListener('keydown', e => {
+    if(e.key==='ArrowRight' && index < games.length-1){ index++; update(); }
+    if(e.key==='ArrowLeft' && index > 0){ index--; update(); }
+  });
+
+  // Click tambien
+  games.forEach((g,i) => g.addEventListener('click', ()=>{ index=i; update(); }));
+
+  update();
+</script>
+</body>
+</html>
