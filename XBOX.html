@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>XBMC Media Center - DVD Wrap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    width:100vw;height:100vh;
+    background:#0d5c10;
+    display:grid;place-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  /* Marco negro como TV vieja */
+ .screen{
+    width:960px;
+    height:540px;
+    position:relative;
+    overflow:hidden;
+    background:
+      linear-gradient(100deg, rgba(0,0,0,0.6) 0%, rgba(18,92,16,0.2) 40%, rgba(12,61,11,0.8) 100%),
+      url('https://i.imgur.com/Yg0c8jG.jpg'); /* fondo verde halo */
+    background-size:cover;
+    background-position:center right;
+    border:12px solid #000;
+    box-shadow:0 0 0 2px #222;
+  }
+ .screen::before{
+    content:'';
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(60,180,20,0.35) 0%, transparent 60%),
+      repeating-linear-gradient(90deg, transparent 0, rgba(0,255,0,0.04) 1px, transparent 2px);
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* Logo XBMC */
+ .logo{
+    position:absolute;
+    left:58px;top:22px;
+    z-index:5;
+    display:flex;flex-direction:column;
+    line-height:1;
+  }
+ .logo b{
+    font-size:28px;
+    font-weight:900;
+    color:#d4ff00;
+    letter-spacing:-1px;
+    font-style:italic;
+    text-shadow:0 0 8px #7aff00;
+    transform:skewX(-10deg);
+  }
+ .logo span{
+    font-size:8px;
+    color:#fff;
+    letter-spacing:3px;
+    margin-top:-2px;
+    margin-left:4px;
+    opacity:0.9;
+  }
+
+  /* Menu izquierdo */
+ .left-menu{
+    position:absolute;
+    left:56px;top:90px;
+    width:188px;
+    z-index:5;
+  }
+ .menu-row{
+    color:#fff;
+    font-size:13px;
+    padding:6px 10px;
+    margin-bottom:2px;
+    opacity:0.9;
+  }
+ .menu-row.white-line{
+    border-bottom:1px solid #fff;
+    padding-bottom:8px;
+    margin-bottom:6px;
+  }
+ .menu-row.highlight{
+    background:linear-gradient(to right, #7fb539, #3a5f0e);
+    border:1px solid #9ad14a;
+    box-shadow:inset 0 0 6px rgba(255,255,255,0.4);
+  }
+
+  /* Preview video abajo izq */
+ .preview{
+    position:absolute;
+    left:56px;top:275px;
+    width:186px;height:108px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:#000;
+    z-index:5;
+    overflow:hidden;
+  }
+ .preview img{width:100%;height:100%;object-fit:cover;filter:brightness(0.8) contrast(1.1)}
+ .preview.rewind{
+    position:absolute;top:4px;right:30px;
+    font-size:7px;color:#fff;letter-spacing:1px;background:rgba(0,0,0,0.5);padding:1px 3px;
+  }
+
+  /* Info debajo del preview */
+ .info{
+    position:absolute;
+    left:240px;top:288px;
+    z-index:5;
+    color:#d6ff54;
+    font-size:12px;
+    line-height:1.5;
+    text-shadow:1px 1px 2px #000;
+  }
+ .info b{color:#eaff8a;font-size:13px}
+ .bottom-bar{
+    position:absolute;
+    left:56px;bottom:18px;
+    z-index:5;
+    color:#fff;
+    font-size:11px;
+  }
+ .bottom-bar b{color:#d6ff54;margin-left:12px}
+
+  /* Covers */
+ .shelf{
+    position:absolute;
+    left:268px;top:98px;
+    display:flex;
+    gap:26px;
+    z-index:4;
+    align-items:flex-start;
+  }
+ .dvd{
+    width:98px;height:148px;
+    position:relative;
+    transform-style:preserve-3d;
+    cursor:pointer;
+    transition:transform 0.3s ease;
+  }
+ .dvd:hover{transform:translateY(-6px) scale(1.05)}
+ .dvd.box{
+    width:100%;height:100%;
+    background:#ddd;
+    box-shadow:-5px 0 0 #1a1a1a, -1px 0 8px rgba(0,0,0,0.8);
+    position:relative;
+  }
+ .dvd.box img{width:100%;height:100%;object-fit:cover;display:block}
+ .dvd.spine{
+    position:absolute;left:-8px;top:1px;bottom:1px;width:8px;
+    background:linear-gradient(to right, #2a2a2a, #000);
+    transform:skewY(-8deg);
+  }
+ .dvd.xbox-top{
+    position:absolute;top:0;left:0;right:0;height:10px;
+    background:#000;color:#7fff00;font-size:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:bold;letter-spacing:1px;
+  }
+  /* Reflejo */
+ .dvd.reflection{
+    position:absolute;
+    top:100%;left:0;
+    width:100%;height:75%;
+    transform:scaleY(-1);
+    opacity:0.24;
+    background-size:cover;
+    background-position:bottom;
+    mask-image:linear-gradient(to bottom, rgba(255,255,255,0.4), transparent 90%);
+    -webkit-mask-image:linear-gradient(to bottom, rgba(255,255,255,0.4), transparent 90%);
+    margin-top:4px;
+    filter:blur(0.6px);
+    pointer-events:none;
+  }
+
+  /* Fondito Master Chief derecha */
+ .halo-bg{
+    position:absolute;
+    right:0;top:0;bottom:0;width:55%;
+    background:url('https://i.imgur.com/4s8Q6hX.png') no-repeat right center;
+    background-size:contain;
+    opacity:0.32;
+    mix-blend-mode:screen;
+    pointer-events:none;
+    z-index:2;
+  }
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <div class="halo-bg"></div>
+
+  <div class="logo"><b>xbmc</b><span>MEDIA CENTER</span></div>
+
+  <div class="left-menu">
+    <div class="menu-row white-line">View: DVD Wrap</div>
+    <div class="menu-row">Sort by: Name</div>
+    <div class="menu-row" style="height:18px"></div>
+    <div class="menu-row">Game saves</div>
+    <div class="menu-row highlight">Game Preview</div>
+  </div>
+
+  <div class="preview">
+    <div class="rewind">REWIND</div>
+    <img src="https://i.imgur.com/JR2rL2L.jpg" id="previewImg">
+  </div>
+
+  <div class="info" id="infoText">
+    <b>BLINX 2</b><br>
+    Size: 3.11 GB<br>
+    Date: 17/07/2013
+  </div>
+
+  <div class="bottom-bar"><span id="bottomTitle">BLINX 2</span> <b>207 Objects</b></div>
+
+  <div class="shelf" id="shelf">
+    <!-- Usa tus portadas reales aquí, ya están recortadas como DVD -->
+    <div class="dvd" data-name="HALO 2 LATINO" data-size="2.84 GB" data-date="15/07/2013" data-preview="https://www.covercaratulas.com/mini-caratula-xbox-winning-eleven-9-liga-mexicana-dvd-por-mettlo-2549.jpg">
+      <div class="spine"></div><div class="xbox-top">XBOX</div><div class="box"><img src="https://imgs.search.brave.com/t9XHI4-N7xGmD7KkOpDmph3s_f5lzAxBQCaoRTizYWw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9ieWdhbWVzLmNv/bS9jb3ZlcnMvNDE5/NjE5My1oYWxvLTIt/eGJveC1mcm9udC1j/b3Zlci5qcGc"></div>
+    <div class="dvd" data-name="DOA XTREME" data-size="1.92 GB" data-date="12/07/2013" data-preview="https://i.imgur.com/QlRph1O.jpg">
+      <div class="spine"></div><div class="xbox-top">XBOX</div><div class="box"><img src="https://i.imgur.com/QlRph1O.jpg"></div><div class="reflection" style="background-image:url('https://i.imgur.com/QlRph1O.jpg')"></div>
+    </div>
+    <div class="dvd" data-name="GALAXY ANGEL" data-size="3.45 GB" data-date="10/07/2013" data-preview="https://i.imgur.com/7v2G2yM.jpg">
+      <div class="spine"></div><div class="xbox-top">XBOX</div><div class="box"><img src="https://i.imgur.com/7v2G2yM.jpg"></div><div class="reflection" style="background-image:url('https://i.imgur.com/7v2G2yM.jpg')"></div>
+    </div>
+  </div>
+
+<script>
+  const dvds = document.querySelectorAll('.dvd');
+  const info = document.getElementById('infoText');
+  const bottom = document.getElementById('bottomTitle');
+  const preview = document.getElementById('previewImg');
+
+  dvds.forEach(d => {
+    d.addEventListener('click', () => {
+      const name = d.dataset.name;
+      const size = d.dataset.size;
+      const date = d.dataset.date;
+      info.innerHTML = `<b>${name}</b><br>Size: ${size}<br>Date: ${date}`;
+      bottom.textContent = name;
+      preview.src = d.dataset.preview;
+      dvds.forEach(x=>x.style.transform='');
+      d.style.transform='translateY(-10px) scale(1.1)';
+    });
+  });
+
+  // Navegación con flechas
+  let idx=3;
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight' && idx < dvds.length-1) idx++;
+    if(e.key==='ArrowLeft' && idx > 0) idx--;
+    dvds[idx].click();
+  });
+</script>
+</body>
+</html>
